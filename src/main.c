@@ -144,7 +144,7 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
-	printf("d=%s\n\n", delay);
+	if(delay) printf("d=%s\n\n", delay);
 
 	ascii_gen_init(output_type, foreground_char, output_size);
 	if(loop) printf("while true; do\n\n");
