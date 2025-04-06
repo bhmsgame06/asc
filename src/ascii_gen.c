@@ -7,8 +7,6 @@
 
 #define MAP_SIZE 39
 
-const struct png_color_16_struct color_black = {0, 0, 0, 0, 0};
-
 const unsigned char brightness_map[MAP_SIZE] = {
 	0x00, 0x16, 0x19, 0x1b, 0x21, 0x2c, 0x2f, 0x32, 0x3d, 0x40, 0x4b, 0x50, 0x53, 0x5c, 0x61, 0x64,
 	0x67, 0x6a, 0x6c, 0x6f, 0x72, 0x75, 0x77, 0x7a, 0x7d, 0x80, 0x83, 0x85, 0x8b, 0x8e, 0x91, 0x96,
@@ -20,6 +18,8 @@ const unsigned char char_map[MAP_SIZE] = {
 	'i', 'n', '}', '[', 'k', '5', 'w', 'U', 'h', '4', 'A', '9', 'H', 'b', 'p', 'D',
 	'8', '0', '#', '%', '&', 'g', '@'
 };
+
+const struct png_color_16_struct color_black = {0, 0, 0, 0, 0};
 
 static struct image_size output_size;
 static int output_type;
@@ -71,8 +71,8 @@ void ascii_gen_init(int ot, char fc, struct image_size is) {
 int ascii_gen_frame(char *file) {
 	unsigned char *image = NULL;
 	unsigned char **rows = NULL;
-	png_structp png_ctx;
-	png_infop png_info;
+	png_structp png_ctx = NULL;
+	png_infop png_info = NULL;
 	unsigned int width, height;
 	int bd, ct, im, cm, fm;
 
@@ -113,16 +113,11 @@ int ascii_gen_frame(char *file) {
 	png_set_background(png_ctx, &color_black, PNG_BACKGROUND_GAMMA_SCREEN, 0, 0);
 
 	if((image = malloc(width * height * 3)) == NULL) {
-		png_destroy_read_struct(&png_ctx, &png_info, NULL);
-		fclose(fd);
-		return 1;
+		longjmp(png_jmpbuf(png_ctx), 1);
 	}
 
 	if((rows = malloc(sizeof(png_bytep) * height)) == NULL) {
-		free(image);
-		png_destroy_read_struct(&png_ctx, &png_info, NULL);
-		fclose(fd);
-		return 1;
+		longjmp(png_jmpbuf(png_ctx), 1);
 	}
 
 	for(int i = 0; i < height; i++) {
@@ -131,6 +126,7 @@ int ascii_gen_frame(char *file) {
 
 	png_read_image(png_ctx, rows);
 	free(rows);
+	rows = NULL;
 
 	if(output_size.width == 0 || output_size.height == 0) {
 		output_size.width = width;

@@ -41,12 +41,12 @@ int main(int argc, char *argv[]) {
 	else
 		program_name = argv[0];
 
-	static int output_type = OUTPUT_MONO;
-	static char foreground_char = '#';
-	static char *delay = NULL;
-	static int clear = 1;
-	static int loop = 0;
-	static struct image_size output_size;
+	int output_type = OUTPUT_MONO;
+	char foreground_char = '#';
+	char *delay = NULL;
+	int clear = 1;
+	int loop = 0;
+	struct image_size output_size;
 
 	memset(&output_size, 0, sizeof(struct image_size));
 
