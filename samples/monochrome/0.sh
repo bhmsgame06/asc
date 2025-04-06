@@ -1,5 +1,3 @@
-d=(null)
-
 clear
 echo "                                                                      "
 echo "                                                                      "
