@@ -227,6 +227,7 @@ int main(int argc, char *argv[]) {
 			fprintf(stderr, "%s: %s: %s\n", program_name, argv[i], strerror(errno = EISDIR));
 			argv[i] = NULL;
 			error = 1;
+			goto skip;
 		}
 
 		num_images++;
