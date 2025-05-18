@@ -1,6 +1,7 @@
 SRC_DIR := src
 BUILD_DIR := bin
-OBJS := $(SRC_DIR)/main.o $(SRC_DIR)/ascii_gen.o
+OBJS := $(SRC_DIR)/main.o \
+		$(SRC_DIR)/ascii_gen.o
 LIBS := -lpng
 CC := gcc
 CFLAGS := -O2
