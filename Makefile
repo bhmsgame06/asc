@@ -18,7 +18,7 @@ asc: $(OBJS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 install:
-	install $(BUILD_DIR)/asc /usr/bin
+	install $(BUILD_DIR)/asc /usr/local/bin
 
 clean:
 	rm -f $(OBJS)
