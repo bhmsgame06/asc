@@ -14,7 +14,7 @@ asc: $(OBJS)
 	mkdir -p $(BUILD_DIR)
 	$(LD) -o $(BUILD_DIR)/$@ $^ $(LDFLAGS)
 
-%.o: %.c
+%.o: %.c %.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 install:
