@@ -11,7 +11,7 @@
 
 static char *program_name;
 
-static struct option longopts[] = {
+static const struct option longopts[] = {
 	{"help",               0, NULL, 'h'},
 	{"output-type",        1, NULL, 't'},
 	{"foreground-string",  1, NULL, 'f'},
