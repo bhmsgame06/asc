@@ -12,6 +12,7 @@
 static char *program_name;
 
 static struct option longopts[] = {
+	{"help",               0, NULL, 'h'},
 	{"output-type",        1, NULL, 't'},
 	{"foreground-string",  1, NULL, 'f'},
 	{"one-rgb-for-string", 0, NULL, 'e'},
@@ -22,7 +23,6 @@ static struct option longopts[] = {
 	{"background-color",   1, NULL, 'b'},
 	{"image-size",         1, NULL, 's'},
 	{"loop",               0, NULL, 'l'},
-	{"help",               0, NULL, 'h'},
 	{0, 0, NULL, 0}
 };
 
@@ -31,6 +31,7 @@ static void show_help(int err) {
 		"Usage: %s [options] <png 1> [png 2] [png 3] ...\n" \
 		"\n" \
 		"Available options:\n" \
+		"  -h, --help                        - show a help and exit.\n" \
 		"  -t, --output-type=<value>         - output color type.\n" \
 		"                                      Must be one of:\n" \
 		"                                      (0) Monochrome;\n" \
@@ -53,8 +54,7 @@ static void show_help(int err) {
 		"  -b, --background-color=<r,g,b>    - background color.\n" \
 		"  -s, --image-size=<geometry>       - output image size of animation,\n" \
 		"                                      e.g. 100x50, 30x20...\n" \
-		"  -l, --loop                        - enable loop.\n" \
-		"  -h, --help                        - show a help and exit.\n", \
+		"  -l, --loop                        - enable loop.\n", \
 		program_name);
 }
 
@@ -78,11 +78,15 @@ int main(int argc, char *argv[]) {
 	memset(&output_size, 0, sizeof(struct image_size));
 
 	int c;
-	while((c = getopt_long(argc, argv, "t:f:enBd:c:b:s:lh", longopts, NULL)) != -1) {
+	while((c = getopt_long(argc, argv, "ht:f:enBd:c:b:s:l", longopts, NULL)) != -1) {
 
 		switch(c) {
 			int i;
 			char *str;
+
+			case 'h': // --help
+				show_help(0);
+				return 0;
 
 			case 't': // --output-type
 				if(optarg == NULL) break;
@@ -193,10 +197,6 @@ int main(int argc, char *argv[]) {
 			case 'l': // --loop
 				loop = 1;
 				break;
-
-			case 'h': // --help
-				show_help(0);
-				return 0;
 
 			default:
 				show_help(1);
