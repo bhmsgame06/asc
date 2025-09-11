@@ -23,7 +23,7 @@ static const struct option longopts[] = {
 	{"background-color",   1, NULL, 'b'},
 	{"image-size",         1, NULL, 's'},
 	{"loop",               0, NULL, 'l'},
-	{0, 0, NULL, 0}
+	{NULL, 0, NULL, 0}
 };
 
 static void show_help(int err) {
