@@ -22,5 +22,5 @@ struct triple_rgb {
 	int blue;
 };
 
-void ascii_gen_init(int, char *, int, struct image_size, int, int, struct triple_rgb);
-int ascii_gen_frame(char *);
+extern void ascii_gen_init(int, char *, int, struct image_size, int, int, struct triple_rgb);
+extern int ascii_gen_frame(char *);
