@@ -7,6 +7,7 @@ CC := gcc
 CFLAGS := -O2
 LD := gcc
 LDFLAGS := $(LIBS)
+PREFIX := /usr/local
 
 all: asc
 
@@ -18,7 +19,7 @@ asc: $(OBJS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 install:
-	install $(BUILD_DIR)/asc /usr/local/bin
+	install $(BUILD_DIR)/asc $(PREFIX)/bin
 
 clean:
 	rm -f $(OBJS)
