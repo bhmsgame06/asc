@@ -19,7 +19,7 @@ asc: $(OBJS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 install:
-	install $(BUILD_DIR)/asc $(PREFIX)/bin
+	install -Dm755 $(BUILD_DIR)/asc $(PREFIX)/bin
 
 clean:
 	rm -f $(OBJS)
