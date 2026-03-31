@@ -140,8 +140,6 @@ int main(int argc, char *argv[]) {
 					return errno;
 				}
 				
-				str = NULL;
-
 				// Parsing red
 				str = strtok(optarg, ",");
 				background_color.red = atoi(str);
@@ -173,8 +171,6 @@ int main(int argc, char *argv[]) {
 					errno = EINVAL;
 					return errno;
 				}
-
-				str = NULL;
 
 				// Parsing new width
 				str = strtok(optarg, "x");
