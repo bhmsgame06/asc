@@ -140,27 +140,27 @@ int main(int argc, char *argv[]) {
 				
 				// Parsing red
 				str = strtok(optarg, ",");
-				background_color.red = atoi(str);
 				if(str == NULL) {
 					fprintf(stderr, "%s: Wrong '--background-color' syntax\n", program_name);
 					return 1;
 				}
+				background_color.red = atoi(str);
 
 				// Parsing green
 				str = strtok(NULL, ",");
-				background_color.green = atoi(str);
 				if(str == NULL) {
 					fprintf(stderr, "%s: Wrong '--background-color' syntax\n", program_name);
 					return 1;
 				}
+				background_color.green = atoi(str);
 				
 				// Parsing blue
 				str = strtok(NULL, ",");
-				background_color.blue = atoi(str);
 				if(str == NULL) {
 					fprintf(stderr, "%s: Wrong '--background-color' syntax\n", program_name);
 					return 1;
 				}
+				background_color.blue = atoi(str);
 
 				break;
 
@@ -171,19 +171,19 @@ int main(int argc, char *argv[]) {
 
 				// Parsing new width
 				str = strtok(optarg, "x");
-				output_size.width = atoi(str);
 				if(str == NULL) {
 					fprintf(stderr, "%s: Wrong '--image-size' syntax\n", program_name);
 					return 1;
 				}
+				output_size.width = atoi(str);
 
 				// Parsing new height
 				str = strtok(NULL, "x");
-				output_size.height = atoi(str);
 				if(str == NULL) {
 					fprintf(stderr, "%s: Wrong '--image-size' syntax\n", program_name);
 					return 1;
 				}
+				output_size.height = atoi(str);
 				
 				break;
 
