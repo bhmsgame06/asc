@@ -92,8 +92,8 @@ int main(int argc, char *argv[]) {
 				if(optarg == NULL) break;
 				i = atoi(optarg);
 				if(i >= sizeof(enum output_type)) {
-					fprintf(stderr, "%s: Output type - %s: %s\n\n", program_name, optarg, strerror(errno = EINVAL));
-					return errno;
+					fprintf(stderr, "%s: Output type - %s\n", program_name, optarg);
+					return 1;
 				}
 				output_type = i;
 				break;
@@ -122,70 +122,67 @@ int main(int argc, char *argv[]) {
 
 			case 'c': // --clear-action
 				if(optarg == NULL) {
-					errno = EINVAL;
-					return errno;
+					return 1;
 				}
 
 				i = atoi(optarg);
 				if(i >= sizeof(enum clear_action)) {
-					fprintf(stderr, "%s: Clear action - %s: %s\n\n", program_name, optarg, strerror(errno = EINVAL));
-					return errno;
+					fprintf(stderr, "%s: Clear action - %s\n", program_name, optarg);
+					return 1;
 				}
 				clear_action = i;
 				break;
 
 			case 'b': // --background-color
 				if(optarg == NULL) {
-					errno = EINVAL;
-					return errno;
+					return 1;
 				}
 				
 				// Parsing red
 				str = strtok(optarg, ",");
 				background_color.red = atoi(str);
 				if(str == NULL) {
-					fprintf(stderr, "%s: Wrong '--background-color' syntax: %s\n", program_name, strerror(errno = EINVAL));
-					return errno;
+					fprintf(stderr, "%s: Wrong '--background-color' syntax\n", program_name);
+					return 1;
 				}
 
 				// Parsing green
 				str = strtok(NULL, ",");
 				background_color.green = atoi(str);
 				if(str == NULL) {
-					fprintf(stderr, "%s: Wrong '--background-color' syntax: %s\n", program_name, strerror(errno = EINVAL));
-					return errno;
+					fprintf(stderr, "%s: Wrong '--background-color' syntax\n", program_name);
+					return 1;
 				}
 				
 				// Parsing blue
 				str = strtok(NULL, ",");
 				background_color.blue = atoi(str);
 				if(str == NULL) {
-					fprintf(stderr, "%s: Wrong '--background-color' syntax: %s\n", program_name, strerror(errno = EINVAL));
-					return errno;
+					fprintf(stderr, "%s: Wrong '--background-color' syntax\n", program_name);
+					return 1;
 				}
 
 				break;
 
 			case 's': // --image-size
 				if(optarg == NULL) {
-					errno = EINVAL;
-					return errno;
+					return 1;
 				}
 
 				// Parsing new width
 				str = strtok(optarg, "x");
 				output_size.width = atoi(str);
 				if(str == NULL) {
-					fprintf(stderr, "%s: Wrong '--image-size' syntax: %s\n", program_name, strerror(errno = EINVAL));
-					return errno;
+					fprintf(stderr, "%s: Wrong '--image-size' syntax\n", program_name);
+					return 1;
 				}
 
 				// Parsing new height
 				str = strtok(NULL, "x");
 				output_size.height = atoi(str);
 				if(str == NULL) {
-					fprintf(stderr, "%s: Wrong '--image-size' syntax: %s\n", program_name, strerror(errno = EINVAL));
-					return errno;
+					fprintf(stderr, "%s: Wrong '--image-size' syntax\n", program_name);
+					return 1;
 				}
 				
 				break;
@@ -270,8 +267,8 @@ skip:
 
 			// Finally ASCII generating
 			if(ascii_gen_frame(argv[i])) {
-				fprintf(stderr, "%s: At file - %s: %s\n", program_name, argv[i], strerror(errno = EINVAL));
-				return errno;
+				fprintf(stderr, "%s: At file - %s\n", program_name, argv[i]);
+				return 1;
 			}
 
 			// Ok
