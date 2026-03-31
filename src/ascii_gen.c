@@ -140,9 +140,16 @@ int ascii_gen_frame(char *file) {
 	free(rows);
 	rows = NULL;
 
-	if(output_size.width == 0 || output_size.height == 0) {
+	if(!output_size.width && !output_size.height) {
 		output_size.width = width;
-		output_size.height = height;
+		output_size.height = height >> 1;
+	} else if(!output_size.width) {
+		output_size.width = output_size.height * width / height;
+		output_size.height >>= 1;
+	} else if(!output_size.height) {
+		output_size.height = (output_size.width * height / width) >> 1;
+	} else {
+		output_size.height >>= 1;
 	}
 
 	if(local_one_rgb_for_string)
