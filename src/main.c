@@ -280,6 +280,7 @@ skip:
 
 	// Ok
 	if(loop) printf("done\n");
+	else if(output_type != OUTPUT_MONO) printf("echo -ne \"\\033[0m\"\n");
 
 	return 0;
 }
