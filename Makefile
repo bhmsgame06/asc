@@ -4,7 +4,7 @@ OBJS := $(SRC_DIR)/main.o \
 		$(SRC_DIR)/ascii_gen.o
 LIBS := -lpng
 CC := gcc
-CFLAGS := -O2
+CFLAGS := -O2 -g
 LD := gcc
 LDFLAGS := $(LIBS)
 PREFIX := /usr/local
